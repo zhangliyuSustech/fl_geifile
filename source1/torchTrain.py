@@ -49,6 +49,7 @@ def train_epoch(net, train_iter, loss_function, optimizer, device, top_k, label_
 
 def predict_epoch(net, test_iter, device, top_k, label_decode, encoder):
     predict_answer_list = []
+    real_answer_list = []
     state = None
     how_many_instance = 0
     how_many_instance_right = 0
@@ -72,6 +73,7 @@ def predict_epoch(net, test_iter, device, top_k, label_decode, encoder):
             if predict_answer == k_origin:
                 how_many_instance_right = how_many_instance_right + 1
             how_many_instance = how_many_instance + 1
-            predict_answer_list.append(predict_answer)
+            predict_answer_list.append(str(predict_answer[0]))
+            real_answer_list.append(str(k[0]))
             # 这个取索引的方法是取出前5个然后只根据这5个概率去看
-    return how_many_instance, how_many_instance_right, predict_answer_list
+    return how_many_instance, how_many_instance_right, predict_answer_list, real_answer_list
